@@ -4,10 +4,17 @@ using RestaurantApp.Domain;
 
 namespace RestaurantApp.Api.Controllers
 {
+    /// <summary>
+    /// Restaurants controller
+    /// </summary>
     [Produces("application/json")]
     [Route("api/restaurants")]
     public class RestaurantsController : Controller
     {
+        /// <summary>
+        /// Get all restaurants
+        /// </summary>
+        /// <returns>List of restaurants</returns>
         [HttpGet]
         public IEnumerable<Restaurant> Get()
         {
@@ -20,6 +27,11 @@ namespace RestaurantApp.Api.Controllers
             return restaurants;
         }
 
+        /// <summary>
+        /// Get a restaurant based on an id
+        /// </summary>
+        /// <param name="id">id of the restaurant</param>
+        /// <returns>Instance of Restaurant class</returns>
         [HttpGet("{id}")]
         public Restaurant Get(int id)
         {

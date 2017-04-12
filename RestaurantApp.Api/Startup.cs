@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.PlatformAbstractions;
+using Swashbuckle.Swagger.Model;
+using System.IO;
 
 namespace RestaurantApp.Api
 {
@@ -12,6 +15,21 @@ namespace RestaurantApp.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSwaggerGen();
+            services.ConfigureSwaggerGen(options =>
+            {
+                options.SingleApiVersion(new Info
+                {
+                    Version = "v1",
+                    Title = "Restaurant API",
+                    Description = "Descritption de l'API"
+                });
+
+                var basePath = PlatformServices.Default.Application.ApplicationBasePath;
+
+                var xmlPath = Path.Combine(basePath, "RestaurantApp.Api.xml");
+                options.IncludeXmlComments(xmlPath);
+            });
+
             services.AddMvc();
         }
 
