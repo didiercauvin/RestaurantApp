@@ -8,6 +8,7 @@ namespace RestaurantApp.Api.Controllers
     [Route("api/restaurants")]
     public class RestaurantsController : Controller
     {
+        [HttpGet]
         public IEnumerable<Restaurant> Get()
         {
             var restaurants = new Restaurant[] 
@@ -17,6 +18,12 @@ namespace RestaurantApp.Api.Controllers
             };
             
             return restaurants;
+        }
+
+        [HttpGet("{id}")]
+        public Restaurant Get(int id)
+        {
+            return new Restaurant { Id = 1, Name = "Restaurant 1" };
         }
     }
 }
