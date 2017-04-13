@@ -11,6 +11,14 @@
             ],
             "isBuildCommand": true,
             "problemMatcher": "$msCompile"
+        },
+        {
+            "taskName": "run",
+            "args": [
+                "--project",
+                "${workspaceRoot}\\RestaurantApp.Api\\RestaurantApp.Api.csproj"
+            ],
+            "isBuildCommand": false
         }
     ]
 }

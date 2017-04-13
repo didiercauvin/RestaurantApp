@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using RestaurantApp.Data;
 using RestaurantApp.Domain;
 
 namespace RestaurantApp.Api.Controllers
@@ -11,6 +12,13 @@ namespace RestaurantApp.Api.Controllers
     [Route("api/restaurants")]
     public class RestaurantsController : Controller
     {
+        private RestaurantAppContext _context;
+
+        public RestaurantsController(RestaurantAppContext context)
+        {
+            _context = context;
+        }
+
         /// <summary>
         /// Get all restaurants
         /// </summary>
@@ -18,13 +26,7 @@ namespace RestaurantApp.Api.Controllers
         [HttpGet]
         public IEnumerable<Restaurant> Get()
         {
-            var restaurants = new Restaurant[] 
-            {
-                new Restaurant { Id = 1, Name = "Restaurant 1" },
-                new Restaurant { Id = 2, Name = "Restaurant 2" }
-            };
-            
-            return restaurants;
+            return _context.Restaurants;
         }
 
         /// <summary>

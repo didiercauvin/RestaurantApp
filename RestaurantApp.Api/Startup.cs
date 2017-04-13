@@ -2,44 +2,42 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.PlatformAbstractions;
-using Swashbuckle.Swagger.Model;
-using System.IO;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using RestaurantApp.Data;
 
 namespace RestaurantApp.Api
 {
     public class Startup
     {
+        public IConfigurationRoot Configuration { get; }
+
+        public Startup(IHostingEnvironment env)
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables();
+            Configuration = builder.Build();
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSwaggerGen();
-            services.ConfigureSwaggerGen(options =>
+            services.AddDbContext<RestaurantAppContext>(options =>
             {
-                options.SingleApiVersion(new Info
-                {
-                    Version = "v1",
-                    Title = "Restaurant API",
-                    Description = "Descritption de l'API"
-                });
-
-                var basePath = PlatformServices.Default.Application.ApplicationBasePath;
-
-                var xmlPath = Path.Combine(basePath, "RestaurantApp.Api.xml");
-                options.IncludeXmlComments(xmlPath);
+                options.UseNpgsql(Configuration.GetConnectionString("RestaurantAppDatabase"), b => b.MigrationsAssembly("RestaurantApp.Api"));
             });
-
             
 
             services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, RestaurantAppContext restaurantAppContext)
         {
-            app.UseSwagger();
-
             loggerFactory.AddConsole();
 
             if (env.IsDevelopment())
@@ -49,7 +47,7 @@ namespace RestaurantApp.Api
 
             app.UseMvc();
 
-            app.UseSwaggerUi();
+            RestaurantAppDbInitializer.Initialize(restaurantAppContext);
         }
     }
 }

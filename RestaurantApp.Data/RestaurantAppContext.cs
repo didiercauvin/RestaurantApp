@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using RestaurantApp.Domain;
 
 namespace RestaurantApp.Data 
 {
@@ -8,5 +9,7 @@ namespace RestaurantApp.Data
         {
             
         }
+
+        public DbSet<Restaurant> Restaurants { get; set; }
     }
 }
