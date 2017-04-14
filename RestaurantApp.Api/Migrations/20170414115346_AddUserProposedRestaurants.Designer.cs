@@ -8,9 +8,10 @@ using RestaurantApp.Data;
 namespace RestaurantApp.Api.Migrations
 {
     [DbContext(typeof(RestaurantAppContext))]
-    partial class RestaurantAppContextModelSnapshot : ModelSnapshot
+    [Migration("20170414115346_AddUserProposedRestaurants")]
+    partial class AddUserProposedRestaurants
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)

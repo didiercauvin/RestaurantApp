@@ -8,18 +8,13 @@ using System.Threading.Tasks;
 
 namespace RestaurantApp.Domain
 {
-    public class User
+    public class UserProposedRestaurant
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
-
-        [Required]
-        public string FirstName { get; set; }
-
-        [Required]
-        public string LastName { get; set; }
-
-        public ICollection<UserProposedRestaurant> UserProposedRestaurants { get; set; }
+        public long RestaurantId { get; set; }
+        public Restaurant Restaurant { get; set; }
+        public DateTime ProposedDate { get; set; }
     }
 }
