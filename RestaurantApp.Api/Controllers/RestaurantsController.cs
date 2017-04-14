@@ -19,14 +19,13 @@ namespace RestaurantApp.Api.Controllers
             _data = data;
         }
 
-        [HttpGet]
         public IEnumerable<Restaurant> Get()
         {
             return _data.Restaurant.GetAll();
         }
 
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        [HttpGet("{id}", Name = "GetRestaurant")]
+        public IActionResult Get(long id)
         {
             var restaurant = _data.Restaurant.Get(id);
             if (restaurant == null)
@@ -35,6 +34,57 @@ namespace RestaurantApp.Api.Controllers
             }
 
             return Ok(restaurant);
+        }
+
+        [HttpPost]
+        public IActionResult Post([FromBody] Restaurant restaurant)
+        {
+            if (restaurant == null)
+            {
+                return BadRequest();
+            }
+
+            _data.Restaurant.Add(restaurant);
+
+            return CreatedAtRoute("GetRestaurant", new { id = restaurant.Id }, restaurant);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Put(long id, [FromBody] Restaurant restaurantData)
+        {
+            if (restaurantData == null || restaurantData.Id != id)
+            {
+                return BadRequest();
+            }
+
+            var restaurant = _data.Restaurant.Get(id);
+            if (restaurant == null)
+            {
+                return NotFound();
+            }
+
+            restaurant.Name = restaurantData.Name;
+            restaurant.Address = restaurantData.Address;
+            restaurant.ZipCode = restaurantData.ZipCode;
+            restaurant.City = restaurantData.City;
+            restaurant.Description = restaurantData.Description;
+
+            _data.Restaurant.Update(restaurant);
+            return new NoContentResult();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(long id)
+        {
+            var restaurant = _data.Restaurant.Get(id);
+            if (restaurant == null)
+            {
+                return NotFound();
+            }
+
+            _data.Restaurant.Delete(id);
+
+            return new NoContentResult();
         }
     }
 }

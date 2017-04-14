@@ -20,9 +20,28 @@ namespace RestaurantApp.Data
             return _context.Restaurants;
         }
 
-        public Restaurant Get(int id)
+        public Restaurant Get(long id)
         {
             return _context.Restaurants.FirstOrDefault(x => x.Id == id);
+        }
+
+        public void Add(Restaurant restaurant)
+        {
+            _context.Restaurants.Add(restaurant);
+            _context.SaveChanges();
+        }
+        
+        public void Update(Restaurant restaurant)
+        {
+            _context.Restaurants.Update(restaurant);
+            _context.SaveChanges();
+        }
+
+        public void Delete(long id)
+        {
+            var restaurant = _context.Restaurants.First(x => x.Id == id);
+            _context.Restaurants.Remove(restaurant);
+            _context.SaveChanges();
         }
     }
 }
