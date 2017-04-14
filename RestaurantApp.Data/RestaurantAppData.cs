@@ -6,14 +6,14 @@ namespace RestaurantApp.Data
 {
     public class RestaurantAppData
     {
-        private RestaurantRepository _restaurantRepo;
+        private RestaurantData _restaurantRepo;
 
         public RestaurantAppData(RestaurantAppContext context)
         {
-            _restaurantRepo = new RestaurantRepository(context);
+            _restaurantRepo = new RestaurantData(context);
         }
 
-        public RestaurantRepository Restaurant
+        public RestaurantData Restaurant
         {
             get
             {

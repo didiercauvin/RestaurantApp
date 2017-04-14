@@ -19,25 +19,22 @@ namespace RestaurantApp.Api.Controllers
             _data = data;
         }
 
-        /// <summary>
-        /// Get all restaurants
-        /// </summary>
-        /// <returns>List of restaurants</returns>
         [HttpGet]
         public IEnumerable<Restaurant> Get()
         {
-            return _data.Restaurant.GetRestaurants();
+            return _data.Restaurant.GetAll();
         }
 
-        /// <summary>
-        /// Get a restaurant based on an id
-        /// </summary>
-        /// <param name="id">id of the restaurant</param>
-        /// <returns>Instance of Restaurant class</returns>
         [HttpGet("{id}")]
-        public Restaurant Get(int id)
+        public IActionResult Get(int id)
         {
-            return new Restaurant { Id = 1, Name = "Restaurant 1" };
+            var restaurant = _data.Restaurant.Get(id);
+            if (restaurant == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(restaurant);
         }
     }
 }
