@@ -12,11 +12,11 @@ namespace RestaurantApp.Api.Controllers
     [Route("api/restaurants")]
     public class RestaurantsController : Controller
     {
-        private RestaurantRepository _repo;
+        private RestaurantAppData _data;
 
-        public RestaurantsController(RestaurantRepository repo)
+        public RestaurantsController(RestaurantAppData data)
         {
-            _repo = repo;
+            _data = data;
         }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace RestaurantApp.Api.Controllers
         [HttpGet]
         public IEnumerable<Restaurant> Get()
         {
-            return _repo.GetRestaurants();
+            return _data.Restaurant.GetRestaurants();
         }
 
         /// <summary>

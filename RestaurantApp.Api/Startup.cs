@@ -31,7 +31,7 @@ namespace RestaurantApp.Api
                 options.UseNpgsql(Configuration.GetConnectionString("RestaurantAppDatabase"), b => b.MigrationsAssembly("RestaurantApp.Api"));
             });
 
-            services.AddScoped<RestaurantRepository>();
+            services.AddScoped<RestaurantAppData>();
 
             services.AddMvc();
         }
