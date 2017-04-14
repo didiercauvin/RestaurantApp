@@ -8,8 +8,8 @@ using RestaurantApp.Data;
 namespace RestaurantApp.Api.Migrations
 {
     [DbContext(typeof(RestaurantAppContext))]
-    [Migration("20170413114517_InitializeRestaurantsTable")]
-    partial class InitializeRestaurantsTable
+    [Migration("20170414113816_InitializeUsersAndRestaurantsTables")]
+    partial class InitializeUsersAndRestaurantsTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,7 +19,7 @@ namespace RestaurantApp.Api.Migrations
 
             modelBuilder.Entity("RestaurantApp.Domain.Restaurant", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
 
@@ -41,6 +41,23 @@ namespace RestaurantApp.Api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Restaurants");
+                });
+
+            modelBuilder.Entity("RestaurantApp.Domain.User", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+
+                    b.Property<string>("FirstName")
+                        .IsRequired();
+
+                    b.Property<string>("LastName")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
                 });
         }
     }

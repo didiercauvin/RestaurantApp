@@ -18,7 +18,7 @@ namespace RestaurantApp.Api.Migrations
 
             modelBuilder.Entity("RestaurantApp.Domain.Restaurant", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
 
@@ -40,6 +40,23 @@ namespace RestaurantApp.Api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Restaurants");
+                });
+
+            modelBuilder.Entity("RestaurantApp.Domain.User", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+
+                    b.Property<string>("FirstName")
+                        .IsRequired();
+
+                    b.Property<string>("LastName")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
                 });
         }
     }

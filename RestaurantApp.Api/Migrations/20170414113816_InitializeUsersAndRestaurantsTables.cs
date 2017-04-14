@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace RestaurantApp.Api.Migrations
 {
-    public partial class InitializeRestaurantsTable : Migration
+    public partial class InitializeUsersAndRestaurantsTables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,7 @@ namespace RestaurantApp.Api.Migrations
                 name: "Restaurants",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     Address = table.Column<string>(nullable: false),
                     City = table.Column<string>(nullable: false),
@@ -25,12 +25,29 @@ namespace RestaurantApp.Api.Migrations
                 {
                     table.PrimaryKey("PK_Restaurants", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "Restaurants");
+
+            migrationBuilder.DropTable(
+                name: "Users");
         }
     }
 }

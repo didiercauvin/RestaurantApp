@@ -11,5 +11,6 @@ namespace RestaurantApp.Data
         }
 
         public DbSet<Restaurant> Restaurants { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

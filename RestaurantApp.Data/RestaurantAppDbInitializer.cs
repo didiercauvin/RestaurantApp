@@ -25,6 +25,17 @@ namespace RestaurantApp.Data
 
             context.Restaurants.AddRange(restaurants);
 
+            var didier = new User { FirstName = "Didier", LastName = "Cauvin" };
+            var ludovic = new User { FirstName = "Ludovic", LastName = "Meril" };
+
+            var users = new User[]
+            {
+                didier,
+                ludovic
+            };
+
+            context.Users.AddRange(users);
+
             context.SaveChanges();
         }
     }
