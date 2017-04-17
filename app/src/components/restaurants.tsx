@@ -2,11 +2,11 @@ import * as React from 'react';
 import { Input } from '../share/elements';
 
 interface AddRestaurantState{
-    nom:string;
-    adresse:string;
-    codePostal:string;
-    ville:string;
-    aEmporter: boolean;
+    name:string;
+    adress:string;
+    postalCode:string;
+    city:string;
+    takeOut: boolean;
 }
 
 interface RestaurantProps {
@@ -17,17 +17,19 @@ export class Restaurants extends React.Component<RestaurantProps, AddRestaurantS
     constructor(props: RestaurantProps) {
         super(props);
         this.state = {
-            nom:'',
-            aEmporter: false,
-            adresse:'',
-            codePostal:'',
-            ville:''
+            name:'',
+            takeOut: false,
+            adress:'',
+            postalCode:'',
+            city:''
         };
     }
 
     
     componentDidMount(){
-        componentHandler.upgradeDom();
+        //tricks pour typescript pour register dans gmtl
+        var windowany:any = window;
+        windowany.componentHandler.upgradeDom();
     }
 
     render() {
@@ -47,12 +49,12 @@ export class Restaurants extends React.Component<RestaurantProps, AddRestaurantS
 
         return (
             <form >
-                <Input name="Nom du restaurant" id="nom" value={this.state.nom} onchange={handleInputChange}/>
+                <Input name="Nom du restaurant" id="nom" value={this.state.name} onchange={handleInputChange}/>
                 <br />
-                <Input name="Adresse" id="adresse" value={this.state.adresse} onchange={handleInputChange}/>
+                <Input name="Adresse" id="adresse" value={this.state.adress} onchange={handleInputChange}/>
                 <br />
-                <Input name="Code Postal" id="codePostal" value={this.state.codePostal} onchange={handleInputChange}/>
-                <Input name="Ville" id="ville" value={this.state.ville} onchange={handleInputChange}/>
+                <Input name="Code Postal" id="codePostal" value={this.state.postalCode} onchange={handleInputChange}/>
+                <Input name="Ville" id="ville" value={this.state.city} onchange={handleInputChange}/>
                 <br />
                 <label className="mdl-switch mdl-js-switch mdl-js-ripple-effect" >
                     <span className="mdl-switch__label" htmlFor="aEmporter">Vente à emporter</span>                    
@@ -60,7 +62,7 @@ export class Restaurants extends React.Component<RestaurantProps, AddRestaurantS
                            id="aEmporter"
                            className="mdl-switch__input"
                            onChange={handleInputChange}
-                           checked={this.state.aEmporter}  />
+                           checked={this.state.takeOut}  />
                 </label>
                 <br/>
                 <div className="submit-form">
