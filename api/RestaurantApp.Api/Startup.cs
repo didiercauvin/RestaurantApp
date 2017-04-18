@@ -47,6 +47,7 @@ namespace RestaurantApp.Api
             }
 
             app.UseMvc();
+            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             RestaurantAppDbInitializer.Initialize(restaurantAppContext);
         }

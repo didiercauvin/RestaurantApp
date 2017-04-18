@@ -3,7 +3,7 @@ import { Header } from './components/header';
 import { Router, Route, BrowserRouter } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import { Home } from './home';
-import { Restaurants } from './components/restaurants';
+import  AddRestaurant  from './components/restaurants';
 
 interface RootProps {
     test?: string;
@@ -21,7 +21,7 @@ export class Root extends React.Component<RootProps, {}>{
                     <div className="container">
                         <Route exact path="/" component={Home} />
                         <Route exact path="/restaurants" render={() => (
-                            <Restaurants />)} />
+                            <AddRestaurant />)} />
                     </div>
                 </div>
             </BrowserRouter>

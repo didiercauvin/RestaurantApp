@@ -1,74 +1,96 @@
 import * as React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import { Input } from '../share/elements';
 
-interface AddRestaurantState{
-    nom:string;
-    adresse:string;
-    codePostal:string;
-    ville:string;
-    aEmporter: boolean;
+interface AddRestaurantState {
+    name: string;
+    adress: string;
+    postalCode: string;
+    city: string;
+    takeOut: boolean;
 }
 
 interface RestaurantProps {
     restos?: string[];
 }
-export class Restaurants extends React.Component<RestaurantProps, AddRestaurantState>{
 
-    constructor(props: RestaurantProps) {
+interface DispatchProps {
+    onSubmit?: (restaurant:AddRestaurantState) => void;
+}
+
+type RestoProps = RestaurantProps & DispatchProps;
+
+class AddRestaurant extends React.Component<RestoProps, AddRestaurantState>{
+
+    constructor(props: RestoProps) {
         super(props);
         this.state = {
-            nom:'',
-            aEmporter: false,
-            adresse:'',
-            codePostal:'',
-            ville:''
+            name: '',
+            takeOut: false,
+            adress: '',
+            postalCode: '',
+            city: ''
         };
     }
 
-    
-    componentDidMount(){
-        componentHandler.upgradeDom();
+
+    componentDidMount() {
+        //tricks pour typescript pour register dans gmtl
+        var windowany: any = window;
+        windowany.componentHandler.upgradeDom();
     }
 
     render() {
-        const handleInputChange = (e:any) =>{
-        const target = e.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.id;
-        this.setState({
-            [name]:value
-        });
-    }
+        const handleInputChange = (e: any) => {
+            const target = e.target;
+            const value = target.type === 'checkbox' ? target.checked : target.value;
+            const name = target.id;
+            this.setState({
+                [name]: value
+            });
+        }
 
-        var handleSubmit = (e:any) => {
-            console.log(e);
-            alert('click');
-          };
+        const handleSubmit = (e:any) => {
+            var restaurant = this.state;
+            this.props.onSubmit(restaurant);
+        }
+
 
         return (
-            <form >
-                <Input name="Nom du restaurant" id="nom" value={this.state.nom} onchange={handleInputChange}/>
+            <div>
+                <Input name="Nom du restaurant" id="name" value={this.state.name} onchange={handleInputChange} />
                 <br />
-                <Input name="Adresse" id="adresse" value={this.state.adresse} onchange={handleInputChange}/>
+                <Input name="Adresse" id="adress" value={this.state.adress} onchange={handleInputChange} />
                 <br />
-                <Input name="Code Postal" id="codePostal" value={this.state.codePostal} onchange={handleInputChange}/>
-                <Input name="Ville" id="ville" value={this.state.ville} onchange={handleInputChange}/>
+                <Input name="Code Postal" id="postalCode" value={this.state.postalCode} onchange={handleInputChange} />
+                <Input name="Ville" id="city" value={this.state.city} onchange={handleInputChange} />
                 <br />
                 <label className="mdl-switch mdl-js-switch mdl-js-ripple-effect" >
-                    <span className="mdl-switch__label" htmlFor="aEmporter">Vente à emporter</span>                    
-                    <input type="checkbox" 
-                           id="aEmporter"
-                           className="mdl-switch__input"
-                           onChange={handleInputChange}
-                           checked={this.state.aEmporter}  />
+                    <span className="mdl-switch__label" htmlFor="aEmporter">Vente à emporter</span>
+                    <input type="checkbox"
+                        id="takeOut"
+                        className="mdl-switch__input"
+                        onChange={handleInputChange}
+                        checked={this.state.takeOut} />
                 </label>
-                <br/>
+                <br />
                 <div className="submit-form">
-                <input type="submit"
-                    onClick={handleSubmit} 
-                    className="mdl-button mdl-js-button mdl-button--raised" />
+                    <input type="submit"
+                        onClick={handleSubmit}
+                        className="mdl-button mdl-js-button mdl-button--raised" />
                 </div>
-            </form>
+                </div>
         );
     }
 }
+
+const mapDispatchtoProps= (dispatch: any) => {
+    return {
+        onSubmit: (restaurant: AddRestaurantState) => {
+            dispatch({ type: 'ADD_RESTAURANT', restaurant })
+        }
+    }
+}
+
+export default connect<any,DispatchProps,any>(null,mapDispatchtoProps)(AddRestaurant);
