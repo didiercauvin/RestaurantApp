@@ -26,6 +26,15 @@ namespace RestaurantApp.Api
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
+
             services.AddDbContext<RestaurantAppContext>(options =>
             {
                 options.UseNpgsql(Configuration.GetConnectionString("RestaurantAppDatabase"), b => b.MigrationsAssembly("RestaurantApp.Api"));
@@ -46,8 +55,8 @@ namespace RestaurantApp.Api
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors("CorsPolicy");
             app.UseMvc();
-            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             RestaurantAppDbInitializer.Initialize(restaurantAppContext);
         }
