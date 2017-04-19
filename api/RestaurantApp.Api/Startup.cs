@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using RestaurantApp.Data;
+using Neo4j.Driver.V1;
 
 namespace RestaurantApp.Api
 {
@@ -35,10 +36,12 @@ namespace RestaurantApp.Api
                     .AllowCredentials());
             });
 
-            services.AddDbContext<RestaurantAppContext>(options =>
-            {
-                options.UseNpgsql(Configuration.GetConnectionString("RestaurantAppDatabase"), b => b.MigrationsAssembly("RestaurantApp.Api"));
-            });
+            services.Add(new ServiceDescriptor(typeof(IDriver), GraphDatabase.Driver("bolt://localhost:7687", AuthTokens.Basic("neo4j", "restaurant"))));
+
+            //services.AddDbContext<RestaurantAppContext>(options =>
+            //{
+            //    options.UseNpgsql(Configuration.GetConnectionString("RestaurantAppDatabase"), b => b.MigrationsAssembly("RestaurantApp.Api"));
+            //});
 
             services.AddScoped<RestaurantAppData>();
 
@@ -46,7 +49,7 @@ namespace RestaurantApp.Api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, RestaurantAppContext restaurantAppContext)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory/*, RestaurantAppContext restaurantAppContext*/)
         {
             loggerFactory.AddConsole();
 
@@ -58,7 +61,7 @@ namespace RestaurantApp.Api
             app.UseCors("CorsPolicy");
             app.UseMvc();
 
-            RestaurantAppDbInitializer.Initialize(restaurantAppContext);
+            //RestaurantAppDbInitializer.Initialize(restaurantAppContext);
         }
     }
 }

@@ -23,15 +23,15 @@ namespace RestaurantApp.Api.Controllers
         {
             return _data.Restaurant.GetAll();
         }
-        
-        [HttpGet("voted")]
-        public IActionResult GetVoted()
-        {
-            var neo4j = new Neo4jTest();
-            var result = neo4j.GetData();
 
-            return Ok(result);
-        }
+        //[HttpGet("voted")]
+        //public IActionResult GetVoted()
+        //{
+        //    var neo4j = new Neo4jTest();
+        //    var result = neo4j.GetData();
+
+        //    return Ok(result);
+        //}
 
         [HttpGet("{id}", Name = "GetRestaurant")]
         public IActionResult Get(long id)
@@ -53,47 +53,47 @@ namespace RestaurantApp.Api.Controllers
                 return BadRequest();
             }
 
-            _data.Restaurant.Add(restaurant);
+            var added = _data.Restaurant.Add(restaurant);
 
-            return CreatedAtRoute("GetRestaurant", new { id = restaurant.Id }, restaurant);
+            return CreatedAtRoute("GetRestaurant", new { id = added.Id }, added);
         }
 
-        [HttpPut("{id}")]
-        public IActionResult Put(long id, [FromBody] Restaurant restaurantData)
-        {
-            if (restaurantData == null || restaurantData.Id != id)
-            {
-                return BadRequest();
-            }
+        //[HttpPut("{id}")]
+        //public IActionResult Put(long id, [FromBody] Restaurant restaurantData)
+        //{
+        //    if (restaurantData == null || restaurantData.Id != id)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            var restaurant = _data.Restaurant.Get(id);
-            if (restaurant == null)
-            {
-                return NotFound();
-            }
+        //    var restaurant = _data.Restaurant.Get(id);
+        //    if (restaurant == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            restaurant.Name = restaurantData.Name;
-            restaurant.Address = restaurantData.Address;
-            restaurant.ZipCode = restaurantData.ZipCode;
-            restaurant.City = restaurantData.City;
-            restaurant.Description = restaurantData.Description;
+        //    restaurant.Name = restaurantData.Name;
+        //    restaurant.Address = restaurantData.Address;
+        //    restaurant.ZipCode = restaurantData.ZipCode;
+        //    restaurant.City = restaurantData.City;
+        //    restaurant.Description = restaurantData.Description;
 
-            _data.Restaurant.Update(restaurant);
-            return new NoContentResult();
-        }
+        //    _data.Restaurant.Update(restaurant);
+        //    return new NoContentResult();
+        //}
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete(long id)
-        {
-            var restaurant = _data.Restaurant.Get(id);
-            if (restaurant == null)
-            {
-                return NotFound();
-            }
+        //[HttpDelete("{id}")]
+        //public IActionResult Delete(long id)
+        //{
+        //    var restaurant = _data.Restaurant.Get(id);
+        //    if (restaurant == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            _data.Restaurant.Delete(id);
+        //    _data.Restaurant.Delete(id);
 
-            return new NoContentResult();
-        }
+        //    return new NoContentResult();
+        //}
     }
 }
