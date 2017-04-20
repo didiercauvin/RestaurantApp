@@ -32,7 +32,7 @@ CREATE (levintage)-[:SERVES]->(francais)
 match (a:CITY {name: "Avignon"})<-[:STREET_OF]-(r:STREET) return r.name
 
 # Voir tous les restaurants de la rue joseph vernet d'Avignon
-match (a:CITY {name: "Avignon"})<-[:STREET_OF]-(s:STREET {name: "Rue Joseph Vernet"})<-[li:LOCATED_IN]-(r:RESTAURANT) return r.name, li.number
+match (a:CITY)<-[:STREET_OF]-(s:STREET)<-[li:LOCATED_IN]-(r:RESTAURANT) where a.name = "Avignon" and s.name="Rue Joseph Vernet" return r.name, li.number
 
 # Voir tous les restaurants qui proposent de la cuisine française
 match (:CUISINE {name: "Français"})<-[:SERVES]-(r:RESTAURANT) return r.name
