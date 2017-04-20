@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using RestaurantApp.Data;
 using RestaurantApp.Domain;
+using System;
 
 namespace RestaurantApp.Api.Controllers
 {
@@ -34,7 +35,7 @@ namespace RestaurantApp.Api.Controllers
         //}
 
         [HttpGet("{id}", Name = "GetRestaurant")]
-        public IActionResult Get(long id)
+        public IActionResult Get(Guid id)
         {
             var restaurant = _data.Restaurant.Get(id);
             if (restaurant == null)

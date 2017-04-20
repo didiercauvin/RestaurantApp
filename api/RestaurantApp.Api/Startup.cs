@@ -36,7 +36,9 @@ namespace RestaurantApp.Api
                     .AllowCredentials());
             });
 
-            services.Add(new ServiceDescriptor(typeof(IDriver), GraphDatabase.Driver("bolt://localhost:7687", AuthTokens.Basic("neo4j", "restaurant"))));
+            //services.Add(new ServiceDescriptor(typeof(IDriver), GraphDatabase.Driver("bolt://localhost:7687", AuthTokens.Basic("neo4j", "restaurant"))));
+
+            services.AddNeo4jDriver("bolt://localhost:7687", "neo4j", "restaurant");
 
             //services.AddDbContext<RestaurantAppContext>(options =>
             //{
