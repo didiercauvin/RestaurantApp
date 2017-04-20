@@ -1,13 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.9
+VisualStudioVersion = 15.0.26403.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestaurantApp.Api", "RestaurantApp.Api\RestaurantApp.Api.csproj", "{60466C5F-E8A6-413A-A850-263084B288B1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestaurantApp.Domain", "RestaurantApp.Domain\RestaurantApp.Domain.csproj", "{94FF93A3-3824-469F-8430-825404D8D578}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestaurantApp.Data", "RestaurantApp.Data\RestaurantApp.Data.csproj", "{A1C6A65B-51EB-44A0-9CA3-80E51D86B19D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{2CCD5395-F98F-43CE-9CF0-C7674DB76620}"
+	ProjectSection(SolutionItems) = preProject
+		referentiel_neo4j.txt = referentiel_neo4j.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
