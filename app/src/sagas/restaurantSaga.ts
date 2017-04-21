@@ -2,7 +2,6 @@ import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
 import {restaurantApi} from '../api/restaurantApi';
 import {AddAction} from '../actions/restaurant';
 
-
 function* postRestaurant(action:AddAction){
     try{
         console.log('saga',action);

@@ -10,6 +10,7 @@ namespace RestaurantApp.Data
         //private RestaurantData_EF _restaurantdata_EF;
         private UserData _userData;
         private RestaurantData _restaurantData;
+        private CuisineData _cuisineData;
 
         public RestaurantAppData(RestaurantAppContext context)
         {
@@ -20,6 +21,7 @@ namespace RestaurantApp.Data
         public RestaurantAppData(IDriver driver)
         {
             _restaurantData = new RestaurantData(driver);
+            _cuisineData = new CuisineData(driver);
         }
 
         public RestaurantData Restaurant
@@ -28,7 +30,12 @@ namespace RestaurantApp.Data
             {
                 return _restaurantData;
             }
-        } 
+        }
+
+        public CuisineData Cuisine
+        {
+            get { return _cuisineData; }
+        }
 
         //public RestaurantData_EF Restaurant_EF
         //{

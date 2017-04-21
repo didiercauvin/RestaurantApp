@@ -2,26 +2,27 @@ match (n) detach delete n
 
 CREATE (avignon:CITY {name: "Avignon", zipcode: "84000"})
 
-CREATE (francais:CUISINE {name: "Français"})
-CREATE (traditionel:CUISINE {name: "Cuisine Traditionnelle"})
+CREATE (francais:CUISINE {id: 1, name: "Français"})
+CREATE (traditionel:CUISINE {id: 2, name: "Cuisine Traditionnelle"})
+CREATE (americain:CUISINE {id: 3, name: "Américain"})
 
 CREATE (bvdSaintMichelAvignon:STREET {name: "Boulevard Saint-Michel"})
 CREATE (rueJosephVernetAvignon:STREET {name: "Rue Joseph Vernet"})
 CREATE (rueGalanteAvignon:STREET {name: "Rue Galante"})
 
-CREATE (leBavard:RESTAURANT {name: "Le Bavard", takeOut: false})
-CREATE (les5sens:RESTAURANT {name: "Les 5 Sens", takeOut: false})
-CREATE (levintage:RESTAURANT {name: "Le Vintage", takeOut: false})
-CREATE (lacourdhonneur:RESTAURANT {name: "La cour d'Honneur", takeOut: false})
+CREATE (leBavard:RESTAURANT {guid: "15729bba-a20f-4596-850b-3a516002ead1", name: "Le Bavard", takeOut: false})
+CREATE (les5sens:RESTAURANT {guid: "d962ec9d-e023-44d5-8562-ddf14418b20d", name: "Les 5 Sens", takeOut: false})
+CREATE (levintage:RESTAURANT {guid: "f63f643f-7ee7-494a-a246-fb6c60e3d3e6", name: "Le Vintage", takeOut: false})
+CREATE (lacourdhonneur:RESTAURANT {guid: "2843a091-3c6f-4963-a696-6ec4f328d75c", name: "La cour d'Honneur", takeOut: false})
 
 CREATE (bvdSaintMichelAvignon)-[:STREET_OF]->(avignon)
 CREATE (rueJosephVernetAvignon)-[:STREET_OF]->(avignon)
 CREATE (rueGalanteAvignon)-[:STREET_OF]->(avignon)
 
-CREATE (leBavard)-[:LOCATED_IN {number: 44}]->(bvdSaintMichelAvignon)
-CREATE (les5sens)-[:LOCATED_IN {number: 18}]->(rueJosephVernetAvignon)
-CREATE (lacourdhonneur)-[:LOCATED_IN {number: 58}]->(rueJosephVernetAvignon)
-CREATE (levintage)-[:LOCATED_IN {number: 10}]->(rueGalanteAvignon)
+CREATE (leBavard)-[:LOCATED_IN {number: "44"}]->(bvdSaintMichelAvignon)
+CREATE (les5sens)-[:LOCATED_IN {number: "18"}]->(rueJosephVernetAvignon)
+CREATE (lacourdhonneur)-[:LOCATED_IN {number: "58"}]->(rueJosephVernetAvignon)
+CREATE (levintage)-[:LOCATED_IN {number: "10"}]->(rueGalanteAvignon)
 
 CREATE (leBavard)-[:SERVES]->(traditionel)
 CREATE (les5sens)-[:SERVES]->(francais)
