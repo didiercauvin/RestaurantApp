@@ -11,7 +11,6 @@ namespace RestaurantApp.Data.Queries
         public const string CREATE = @"MERGE (r:RESTAURANT {uuid: {uuid}, name: {name}})
                                        MERGE(s:STREET { name: {street}})
                                        MERGE(c:CITY { name: {city}, zipcode: {zipcode}})
-                                       MERGE(s)-[:STREET_OF]->(c)
-                                       MERGE(r)-[:LOCATED_IN {number: {streetNumber}}]->(s)";
+                                       CREATE UNIQUE (r)-[:LOCATED_IN {number: {streetNumber}}]->(s)-[:STREET_OF]->(c)";
     }
 }

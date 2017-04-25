@@ -32,8 +32,8 @@ match (a:CITY)<-[:STREET_OF]-(s:STREET)<-[li:LOCATED_IN]-(r:RESTAURANT) where a.
 
 match p=(c:CITY {name: "Avignon"})
 
-MERGE (r:RESTAURANT {uuid: "2843a091-3c6f-4963-a696-6ec4f328d75c", name: "La cour d'Honneur"})
-MERGE (s:STREET {name: "Boulevard Saint-Michel"})
+
+MERGE (r:RESTAURANT {uuid: "d962ec9d-e023-44d5-8562-ddf14418b20d", name: "Les 5 Sens"})
+MERGE (s:STREET {name: "Rue Joseph Vernet"})
 MERGE (c:CITY {name: "Avignon", zipcode: "84000"})
-MERGE (s)-[:STREET_OF]->(c)
-MERGE (r)-[:LOCATED_IN {number: "12"}]->(s)
+CREATE UNIQUE (r)-[:LOCATED_IN {number: "15"}]->(s)-[:STREET_OF]->(c)
