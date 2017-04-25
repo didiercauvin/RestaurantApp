@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\RestaurantApp.Data.Queries\RestaurantApp.Data.Queries.csproj" />
     <ProjectReference Include="..\RestaurantApp.Domain\RestaurantApp.Domain.csproj" />
   </ItemGroup>
   

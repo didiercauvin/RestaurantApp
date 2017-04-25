@@ -25,15 +25,6 @@ namespace RestaurantApp.Api.Controllers
             return _data.Restaurant.GetAll();
         }
 
-        //[HttpGet("voted")]
-        //public IActionResult GetVoted()
-        //{
-        //    var neo4j = new Neo4jTest();
-        //    var result = neo4j.GetData();
-
-        //    return Ok(result);
-        //}
-
         [HttpGet("{id}", Name = "GetRestaurant")]
         public IActionResult Get(Guid id)
         {
