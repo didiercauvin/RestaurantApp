@@ -28,3 +28,12 @@ match (a:CITY {name: "Avignon"})<-[:STREET_OF]-(r:STREET) return r.name
 
 # Voir tous les restaurants de la rue joseph vernet d'Avignon
 match (a:CITY)<-[:STREET_OF]-(s:STREET)<-[li:LOCATED_IN]-(r:RESTAURANT) where a.name = "Avignon" and s.name="Rue Joseph Vernet" return r.name, li.number
+
+
+match p=(c:CITY {name: "Avignon"})
+
+MERGE (r:RESTAURANT {uuid: "2843a091-3c6f-4963-a696-6ec4f328d75c", name: "La cour d'Honneur"})
+MERGE (s:STREET {name: "Boulevard Saint-Michel"})
+MERGE (c:CITY {name: "Avignon", zipcode: "84000"})
+MERGE (s)-[:STREET_OF]->(c)
+MERGE (r)-[:LOCATED_IN {number: "12"}]->(s)
