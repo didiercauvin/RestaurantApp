@@ -17,12 +17,12 @@ namespace RestaurantApp.Data
                 return new Restaurant
                 {
                     Id = Guid.Parse(restaurant["Id"].As<string>()),
-                    Name = restaurant["RestaurantName"].As<string>(),
-                    StreetNumber = restaurant["StreetNumber"].As<string>(),
-                    Street = restaurant["Street"].As<string>(),
+                    Name = restaurant["Name"].As<string>(),
+                    Address = restaurant["Address"].As<string>(),
                     ZipCode = restaurant["ZipCode"].As<string>(),
                     City = restaurant["CityName"].As<string>(),
-                    Description = restaurant["RestaurantDescription"].As<string>()
+                    Description = restaurant["Description"].As<string>(),
+                    TakeOut = restaurant["TakeOut"].As<string>()
                 };
             }
 

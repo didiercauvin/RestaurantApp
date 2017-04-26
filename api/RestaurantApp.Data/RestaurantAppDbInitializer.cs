@@ -14,8 +14,8 @@ namespace RestaurantApp.Data
                 return;
             }
 
-            var resto1 = new Restaurant { Name = "Un bon resto 1", Street = "Adresse 1", ZipCode = "13000", City = "Marseille", Description = "Description 1" };
-            var resto2 = new Restaurant { Name = "Un bon resto 2", Street = "Adresse 3", ZipCode = "75000", City = "Paris", Description = "Description 2" };
+            var resto1 = new Restaurant { Name = "Un bon resto 1", Address = "Adresse 1", ZipCode = "13000", City = "Marseille", Description = "Description 1" };
+            var resto2 = new Restaurant { Name = "Un bon resto 2", Address = "Adresse 3", ZipCode = "75000", City = "Paris", Description = "Description 2" };
 
             var restaurants = new Restaurant[]
             {

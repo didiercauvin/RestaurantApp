@@ -50,42 +50,43 @@ namespace RestaurantApp.Api.Controllers
             return CreatedAtRoute("GetRestaurant", new { id = added.Id }, added);
         }
 
-        //[HttpPut("{id}")]
-        //public IActionResult Put(long id, [FromBody] Restaurant restaurantData)
-        //{
-        //    if (restaurantData == null || restaurantData.Id != id)
-        //    {
-        //        return BadRequest();
-        //    }
+        [HttpPut("{id}")]
+        public IActionResult Put(Guid id, [FromBody] Restaurant restaurantData)
+        {
+            if (restaurantData == null || restaurantData.Id != id)
+            {
+                return BadRequest();
+            }
 
-        //    var restaurant = _data.Restaurant.Get(id);
-        //    if (restaurant == null)
-        //    {
-        //        return NotFound();
-        //    }
+            var restaurant = _data.Restaurant.Get(id);
+            if (restaurant == null)
+            {
+                return NotFound();
+            }
 
-        //    restaurant.Name = restaurantData.Name;
-        //    restaurant.Address = restaurantData.Address;
-        //    restaurant.ZipCode = restaurantData.ZipCode;
-        //    restaurant.City = restaurantData.City;
-        //    restaurant.Description = restaurantData.Description;
+            restaurant.Name = restaurantData.Name;
+            restaurant.Address = restaurantData.Address;
+            restaurant.ZipCode = restaurantData.ZipCode;
+            restaurant.City = restaurantData.City;
+            restaurant.Description = restaurantData.Description;
+            restaurant.TakeOut = restaurantData.TakeOut;
 
-        //    _data.Restaurant.Update(restaurant);
-        //    return new NoContentResult();
-        //}
+            _data.Restaurant.Update(restaurant);
+            return new NoContentResult();
+        }
 
-        //[HttpDelete("{id}")]
-        //public IActionResult Delete(long id)
-        //{
-        //    var restaurant = _data.Restaurant.Get(id);
-        //    if (restaurant == null)
-        //    {
-        //        return NotFound();
-        //    }
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid id)
+        {
+            var restaurant = _data.Restaurant.Get(id);
+            if (restaurant == null)
+            {
+                return NotFound();
+            }
 
-        //    _data.Restaurant.Delete(id);
+            _data.Restaurant.Delete(id);
 
-        //    return new NoContentResult();
-        //}
+            return new NoContentResult();
+        }
     }
 }
