@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Input } from '../share/elements';
+import { Input, TextArea } from '../share/elements';
 
 interface AddRestaurantState {
     name: string;
@@ -72,10 +72,12 @@ class AddRestaurant extends React.Component<RestoProps, AddRestaurantState>{
                 <Input name="Code Postal" id="zipcode" value={this.state.zipcode} onchange={handleInputChange} />
                 <Input name="Ville" id="city" value={this.state.city} onchange={handleInputChange} />
                 <br />
+                <TextArea name="Description" id="description" value={this.state.description} onchange={handleInputChange} />
+                <br />
                 <label className="mdl-switch mdl-js-switch mdl-js-ripple-effect" >
-                    <span className="mdl-switch__label" htmlFor="aEmporter">Vente à emporter</span>
+                    <span className="mdl-switch__label" htmlFor="takeout">Vente à emporter</span>
                     <input type="checkbox"
-                        id="takeOut"
+                        id="takeout"
                         className="mdl-switch__input"
                         onChange={handleInputChange}
                         checked={this.state.takeout} />
