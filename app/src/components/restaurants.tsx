@@ -1,16 +1,15 @@
 import * as React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Input, Select } from '../share/elements';
+import { Input } from '../share/elements';
 
 interface AddRestaurantState {
     name: string;
-    number_street: string;
-    adress: string;
-    postalCode: string;
+    address: string;
+    zipcode: string;
     city: string;
-    takeOut: boolean;
-    cuisine: Array<string>;
+    takeout: boolean;
+    description: string;
 }
 
 interface RestaurantProps {
@@ -29,12 +28,11 @@ class AddRestaurant extends React.Component<RestoProps, AddRestaurantState>{
         super(props);
         this.state = {
             name: '',
-            takeOut: false,
-            number_street: '',
-            adress: '',
-            postalCode: '',
+            takeout: false,
+            address: '',
+            zipcode: '',
             city: '',
-            cuisine: ["coucou", "salut"]
+            description: ''
         };
     }
 
@@ -69,14 +67,10 @@ class AddRestaurant extends React.Component<RestoProps, AddRestaurantState>{
             <div>
                 <Input name="Nom du restaurant" id="name" value={this.state.name} onchange={handleInputChange} />
                 <br />
-                <Input name="N° de rue" id="number_street" value={this.state.number_street} onchange={handleInputChange} />
+                <Input name="Adresse" id="address" value={this.state.address} onchange={handleInputChange} />
                 <br />
-                <Input name="Adresse" id="adress" value={this.state.adress} onchange={handleInputChange} />
-                <br />
-                <Input name="Code Postal" id="postalCode" value={this.state.postalCode} onchange={handleInputChange} />
+                <Input name="Code Postal" id="zipcode" value={this.state.zipcode} onchange={handleInputChange} />
                 <Input name="Ville" id="city" value={this.state.city} onchange={handleInputChange} />
-                <br />
-                <Select name="Type de cuisine" id="cuisine" options={this.state.cuisine} onchange={handleComboboxChange} />
                 <br />
                 <label className="mdl-switch mdl-js-switch mdl-js-ripple-effect" >
                     <span className="mdl-switch__label" htmlFor="aEmporter">Vente à emporter</span>
@@ -84,7 +78,7 @@ class AddRestaurant extends React.Component<RestoProps, AddRestaurantState>{
                         id="takeOut"
                         className="mdl-switch__input"
                         onChange={handleInputChange}
-                        checked={this.state.takeOut} />
+                        checked={this.state.takeout} />
                 </label>
                 <br />
                 <div className="submit-form">

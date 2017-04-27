@@ -4,6 +4,7 @@ import * as request from 'superagent';
 
 export class restaurantApi {
     static addRestaurant(restaurant: Restaurant): Promise<boolean> {
+        console.log(JSON.stringify(restaurant));
         return request.post('http://localhost:63191/api/restaurants')
         .set('Content-Type', 'application/json')
         .set('Accept','application/json')

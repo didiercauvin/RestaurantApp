@@ -14,7 +14,6 @@ namespace RestaurantApp.Data
         private IDriver _driver;
         private RestaurantMapper _restaurantMapper;
 
-
         public RestaurantData(IDriver driver)
         {
             _driver = driver;

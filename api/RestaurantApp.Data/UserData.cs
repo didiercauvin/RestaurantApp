@@ -4,26 +4,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Neo4j.Driver.V1;
 
 namespace RestaurantApp.Data
 {
     public class UserData
     {
-        private RestaurantAppContext _context;
+        private IDriver _driver;
 
-        public UserData(RestaurantAppContext context)
+        public UserData(IDriver driver)
         {
-            _context = context;
+            _driver = driver;
         }
 
         public IEnumerable<User> GetAll()
         {
-            return _context.Users;
+            //using (var session = _driver.Session())
+            //{
+            //    var result = session.Run(Users.GET_ALL)
+            //        .Select(_restaurantMapper.Map);
+
+            //    return result;
+            //}
+
+            return null;
         }
 
         public User Get(long id)
         {
-            return _context.Users.FirstOrDefault(x => x.Id == id);
+            //return _context.Users.FirstOrDefault(x => x.Id == id);
+            return null;
         }
     }
 }

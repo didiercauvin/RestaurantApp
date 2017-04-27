@@ -7,7 +7,6 @@ namespace RestaurantApp.Data
 {
     public class RestaurantAppData
     {
-        //private RestaurantData_EF _restaurantdata_EF;
         private UserData _userData;
         private RestaurantData _restaurantData;
 
