@@ -7,18 +7,14 @@ namespace RestaurantApp.Data
 {
     public class RestaurantAppData
     {
-        private UserData _userData;
-        private RestaurantData _restaurantData;
-
-
-        public RestaurantAppData(IDriver driver)
+        public RestaurantAppData(RestaurantAppContext context)
         {
-            _restaurantData = new RestaurantData(driver);
+            Restaurant = new RestaurantData(context);
         }
 
-        public RestaurantData Restaurant => _restaurantData;
+        public RestaurantData Restaurant { get; }
 
 
-        public UserData User => _userData;
+        public UserData User { get; }
     }
 }

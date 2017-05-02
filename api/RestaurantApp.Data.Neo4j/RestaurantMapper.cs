@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Neo4j.Driver.V1;
 using RestaurantApp.Domain;
 
-namespace RestaurantApp.Data
+namespace RestaurantApp.Data.Neo4j
 {
     public class RestaurantMapper
     {
@@ -16,7 +12,7 @@ namespace RestaurantApp.Data
             {
                 return new Restaurant
                 {
-                    Id = Guid.Parse(restaurant["Id"].As<string>()),
+                    Id = restaurant["Id"].As<long>(),
                     Name = restaurant["Name"].As<string>(),
                     Address = restaurant["Address"].As<string>(),
                     ZipCode = restaurant["ZipCode"].As<string>(),

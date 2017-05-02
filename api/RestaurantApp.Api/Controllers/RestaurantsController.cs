@@ -26,7 +26,7 @@ namespace RestaurantApp.Api.Controllers
         }
 
         [HttpGet("{id}", Name = "GetRestaurant")]
-        public IActionResult Get(Guid id)
+        public IActionResult Get(long id)
         {
             var restaurant = _data.Restaurant.Get(id);
             if (restaurant == null)
@@ -45,13 +45,13 @@ namespace RestaurantApp.Api.Controllers
                 return BadRequest();
             }
 
-            var added = _data.Restaurant.Add(restaurant);
+            _data.Restaurant.Add(restaurant);
 
-            return CreatedAtRoute("GetRestaurant", new { id = added.Id }, added);
+            return CreatedAtRoute("GetRestaurant", new { id = restaurant.Id }, restaurant);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(Guid id, [FromBody] Restaurant restaurantData)
+        public IActionResult Put(long id, [FromBody] Restaurant restaurantData)
         {
             if (restaurantData == null || restaurantData.Id != id)
             {
@@ -76,7 +76,7 @@ namespace RestaurantApp.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(Guid id)
+        public IActionResult Delete(long id)
         {
             var restaurant = _data.Restaurant.Get(id);
             if (restaurant == null)

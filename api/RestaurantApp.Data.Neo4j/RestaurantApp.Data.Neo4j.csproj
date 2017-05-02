@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RestaurantApp.Data.Queries\RestaurantApp.Data.Queries.csproj" />
+    <ProjectReference Include="..\RestaurantApp.Domain\RestaurantApp.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Neo4j.Driver">
+      <HintPath>..\..\..\..\..\.nuget\packages\neo4j.driver\1.2.0\lib\netstandard1.0\Neo4j.Driver.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
