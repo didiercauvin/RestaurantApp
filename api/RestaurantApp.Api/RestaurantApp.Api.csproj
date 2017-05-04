@@ -42,6 +42,7 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RestaurantApp.Data.Neo4j\RestaurantApp.Data.Neo4j.csproj" />
     <ProjectReference Include="..\RestaurantApp.Domain\RestaurantApp.Domain.csproj" />
     <ProjectReference Include="..\RestaurantApp.Data\RestaurantApp.Data.csproj" />
   </ItemGroup>

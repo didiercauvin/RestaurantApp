@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using RestaurantApp.Data;
+using RestaurantApp.Data.Neo4j;
 using RestaurantApp.Domain;
 using System;
+using Neo4j.Driver.V1;
 
 namespace RestaurantApp.Api.Controllers
 {
@@ -15,9 +16,9 @@ namespace RestaurantApp.Api.Controllers
     {
         private RestaurantAppData _data;
 
-        public RestaurantsController(RestaurantAppData data)
+        public RestaurantsController(IDriver driver)
         {
-            _data = data;
+            _data = new  RestaurantAppData(driver);
         }
 
         public IEnumerable<Restaurant> Get()
@@ -26,7 +27,7 @@ namespace RestaurantApp.Api.Controllers
         }
 
         [HttpGet("{id}", Name = "GetRestaurant")]
-        public IActionResult Get(long id)
+        public IActionResult Get(Guid id)
         {
             var restaurant = _data.Restaurant.Get(id);
             if (restaurant == null)
@@ -45,13 +46,13 @@ namespace RestaurantApp.Api.Controllers
                 return BadRequest();
             }
 
-            _data.Restaurant.Add(restaurant);
+            restaurant = _data.Restaurant.Add(restaurant);
 
             return CreatedAtRoute("GetRestaurant", new { id = restaurant.Id }, restaurant);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(long id, [FromBody] Restaurant restaurantData)
+        public IActionResult Put(Guid id, [FromBody] Restaurant restaurantData)
         {
             if (restaurantData == null || restaurantData.Id != id)
             {
@@ -65,9 +66,6 @@ namespace RestaurantApp.Api.Controllers
             }
 
             restaurant.Name = restaurantData.Name;
-            restaurant.Address = restaurantData.Address;
-            restaurant.ZipCode = restaurantData.ZipCode;
-            restaurant.City = restaurantData.City;
             restaurant.Description = restaurantData.Description;
             restaurant.TakeOut = restaurantData.TakeOut;
 
@@ -76,7 +74,7 @@ namespace RestaurantApp.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(long id)
+        public IActionResult Delete(Guid id)
         {
             var restaurant = _data.Restaurant.Get(id);
             if (restaurant == null)

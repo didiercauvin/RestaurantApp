@@ -12,11 +12,8 @@ namespace RestaurantApp.Data.Neo4j
             {
                 return new Restaurant
                 {
-                    Id = restaurant["Id"].As<long>(),
+                    Id = Guid.Parse(restaurant["Id"].As<string>()),
                     Name = restaurant["Name"].As<string>(),
-                    Address = restaurant["Address"].As<string>(),
-                    ZipCode = restaurant["ZipCode"].As<string>(),
-                    City = restaurant["CityName"].As<string>(),
                     Description = restaurant["Description"].As<string>(),
                     TakeOut = restaurant["TakeOut"].As<string>()
                 };

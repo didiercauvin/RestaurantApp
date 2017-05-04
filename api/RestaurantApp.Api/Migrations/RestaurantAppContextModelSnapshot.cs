@@ -18,7 +18,7 @@ namespace RestaurantApp.Api.Migrations
 
             modelBuilder.Entity("RestaurantApp.Domain.Restaurant", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Address");
@@ -65,11 +65,13 @@ namespace RestaurantApp.Api.Migrations
 
                     b.Property<long>("RestaurantId");
 
+                    b.Property<Guid?>("RestaurantId1");
+
                     b.Property<long?>("UserId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RestaurantId");
+                    b.HasIndex("RestaurantId1");
 
                     b.HasIndex("UserId");
 
@@ -80,8 +82,7 @@ namespace RestaurantApp.Api.Migrations
                 {
                     b.HasOne("RestaurantApp.Domain.Restaurant", "Restaurant")
                         .WithMany()
-                        .HasForeignKey("RestaurantId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("RestaurantId1");
 
                     b.HasOne("RestaurantApp.Domain.User")
                         .WithMany("UserProposedRestaurants")

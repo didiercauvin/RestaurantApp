@@ -20,7 +20,7 @@ namespace RestaurantApp.Data
             return _context.Restaurants;
         }
 
-        public Restaurant Get(long id)
+        public Restaurant Get(Guid id)
         {
             return _context.Restaurants.FirstOrDefault(x => x.Id == id);
         }
@@ -37,7 +37,7 @@ namespace RestaurantApp.Data
             _context.SaveChanges();
         }
 
-        public void Delete(long id)
+        public void Delete(Guid id)
         {
             var restaurant = _context.Restaurants.First(x => x.Id == id);
             _context.Restaurants.Remove(restaurant);

@@ -5,9 +5,6 @@ import { Input, TextArea } from '../share/elements';
 
 interface AddRestaurantState {
     name: string;
-    address: string;
-    zipcode: string;
-    city: string;
     takeout: boolean;
     description: string;
 }
@@ -29,9 +26,6 @@ class AddRestaurant extends React.Component<RestoProps, AddRestaurantState>{
         this.state = {
             name: '',
             takeout: false,
-            address: '',
-            zipcode: '',
-            city: '',
             description: ''
         };
     }
@@ -66,11 +60,6 @@ class AddRestaurant extends React.Component<RestoProps, AddRestaurantState>{
         return (
             <div>
                 <Input name="Nom du restaurant" id="name" value={this.state.name} onchange={handleInputChange} />
-                <br />
-                <Input name="Adresse" id="address" value={this.state.address} onchange={handleInputChange} />
-                <br />
-                <Input name="Code Postal" id="zipcode" value={this.state.zipcode} onchange={handleInputChange} />
-                <Input name="Ville" id="city" value={this.state.city} onchange={handleInputChange} />
                 <br />
                 <TextArea name="Description" id="description" value={this.state.description} onchange={handleInputChange} />
                 <br />

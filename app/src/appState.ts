@@ -1,8 +1,5 @@
 export interface Restaurant{
     name:string;
-    adress:string;
-    city:string;
-    zipcode:string;
     takeout:boolean;
 }
 

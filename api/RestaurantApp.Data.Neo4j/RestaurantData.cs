@@ -33,9 +33,6 @@ namespace RestaurantApp.Data.Neo4j
                                 {"uuid", guid.ToString()},
                                 {"name", restaurant.Name},
                                 {"description", restaurant.Description},
-                                {"address", restaurant.Address},
-                                {"zipcode", restaurant.ZipCode},
-                                {"city", restaurant.City},
                                 {"takeout", restaurant.TakeOut}
                             });
 
@@ -43,11 +40,8 @@ namespace RestaurantApp.Data.Neo4j
 
                         return new Restaurant
                         {
-                            //Id = guid,
+                            Id = guid,
                             Name = restaurant.Name,
-                            Address = restaurant.Address,
-                            ZipCode = restaurant.ZipCode,
-                            City = restaurant.City,
                             Description = restaurant.Description,
                             TakeOut = restaurant.TakeOut
                         };
@@ -70,11 +64,9 @@ namespace RestaurantApp.Data.Neo4j
                         tx.Run(Restaurants.UPDATE,
                             new Dictionary<string, object>
                             {
+                                {"uuid", restaurant.Id.ToString() },
                                 {"name", restaurant.Name},
                                 {"description", restaurant.Description},
-                                {"address", restaurant.Address},
-                                {"zipcode", restaurant.ZipCode},
-                                {"city", restaurant.City},
                                 {"takeout", restaurant.TakeOut}
                             });
 
@@ -104,7 +96,7 @@ namespace RestaurantApp.Data.Neo4j
         {
             using (var session = _driver.Session())
             {
-                var restaurant = session.Run(Restaurants.GET_BY_ID, new Dictionary<string, object> { { "id", id.ToString() } })
+                var restaurant = session.Run(Restaurants.GET_BY_ID, new Dictionary<string, object> { { "uuid", id.ToString() } })
                     .FirstOrDefault();
 
                 return _restaurantMapper.Map(restaurant);

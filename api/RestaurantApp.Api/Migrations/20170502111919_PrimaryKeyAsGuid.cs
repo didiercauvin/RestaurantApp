@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace RestaurantApp.Api.Migrations
 {
-    public partial class Initialization : Migration
+    public partial class PrimaryKeyAsGuid : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,8 +13,7 @@ namespace RestaurantApp.Api.Migrations
                 name: "Restaurants",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    Id = table.Column<Guid>(nullable: false),
                     Address = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
@@ -49,17 +48,18 @@ namespace RestaurantApp.Api.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     ProposedDate = table.Column<DateTime>(nullable: false),
                     RestaurantId = table.Column<long>(nullable: false),
+                    RestaurantId1 = table.Column<Guid>(nullable: true),
                     UserId = table.Column<long>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UserProposedRestaurant", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserProposedRestaurant_Restaurants_RestaurantId",
-                        column: x => x.RestaurantId,
+                        name: "FK_UserProposedRestaurant_Restaurants_RestaurantId1",
+                        column: x => x.RestaurantId1,
                         principalTable: "Restaurants",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_UserProposedRestaurant_Users_UserId",
                         column: x => x.UserId,
@@ -69,9 +69,9 @@ namespace RestaurantApp.Api.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserProposedRestaurant_RestaurantId",
+                name: "IX_UserProposedRestaurant_RestaurantId1",
                 table: "UserProposedRestaurant",
-                column: "RestaurantId");
+                column: "RestaurantId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserProposedRestaurant_UserId",
