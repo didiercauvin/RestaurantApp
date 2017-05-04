@@ -12,11 +12,21 @@ export const Header = () => {
                     <Link to="/" className="mdl-navigation__link"><h3>RestaurantApp</h3></Link>
                 </span>
                 <div className="mdl-layout-spacer"></div>
+                <button id="demo-menu-lower-left"
+                    className="mdl-button mdl-js-button">
+                    Restaurants...
+                </button>
                 <nav className="mdl-navigation">
+                    <ul className="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
+                        htmlFor="demo-menu-lower-left">
 
-                    <Link to="/restaurants" className="mdl-navigation__link">Restaurants</Link>
-                    <a href="badges.html" className="mdl-navigation__link">User</a>
-                    <Link to="/profile" className="mdl-navigation__link"></Link>
+                        <li className="mdl-menu__item">
+                            <Link to="/restaurants">Ajouter</Link>
+                        </li>
+                        <li className="mdl-menu__item">
+                            <Link to="/restaurants">Liste</Link>
+                        </li>
+                    </ul>
                 </nav>
             </div>
         </header>
