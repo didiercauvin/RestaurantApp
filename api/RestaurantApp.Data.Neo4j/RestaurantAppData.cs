@@ -9,14 +9,15 @@ namespace RestaurantApp.Data.Neo4j
 {
     public class RestaurantAppData
     {
-        public RestaurantAppData(IDriver context)
+        public RestaurantAppData(IDriver driver)
         {
-            Restaurant = new RestaurantData(context);
+            Restaurant = new RestaurantData(driver);
+            Group = new GroupData(driver);
         }
 
         public RestaurantData Restaurant { get; }
 
-
+        public GroupData Group { get; set; }
         //public UserData User { get; }
     }
 }
