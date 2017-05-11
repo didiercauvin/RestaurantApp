@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using RestaurantApp.Data;
+using RestaurantApp.Data.Neo4j;
 using Neo4j.Driver.V1;
 
 namespace RestaurantApp.Api
@@ -37,7 +37,7 @@ namespace RestaurantApp.Api
             });
 
             services.AddNeo4jDriver("bolt://localhost:7687", "neo4j", "restaurant");
-
+            services.AddTransient<RestaurantAppData>();
             //services.AddDbContext<RestaurantAppContext>(options =>
             //{
             //    options.UseNpgsql(Configuration.GetConnectionString("RestaurantAppDatabase"), b => b.MigrationsAssembly("RestaurantApp.Api"));

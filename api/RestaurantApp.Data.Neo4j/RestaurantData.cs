@@ -9,8 +9,8 @@ namespace RestaurantApp.Data.Neo4j
 {
     public class RestaurantData
     {
-        private IDriver _driver;
-        private RestaurantMapper _restaurantMapper;
+        private readonly IDriver _driver;
+        private readonly RestaurantMapper _restaurantMapper;
 
         public RestaurantData(IDriver driver)
         {

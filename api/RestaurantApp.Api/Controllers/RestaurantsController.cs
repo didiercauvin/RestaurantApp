@@ -14,11 +14,11 @@ namespace RestaurantApp.Api.Controllers
     [Route("api/restaurants")]
     public class RestaurantsController : Controller
     {
-        private RestaurantAppData _data;
+        private readonly RestaurantAppData _data;
 
-        public RestaurantsController(IDriver driver)
+        public RestaurantsController(RestaurantAppData data)
         {
-            _data = new  RestaurantAppData(driver);
+            _data = data;
         }
 
         public IEnumerable<Restaurant> Get()

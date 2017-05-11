@@ -14,13 +14,11 @@ namespace RestaurantApp.Api.Controllers
     [Route("api/groups")]
     public class GroupsController : Controller
     {
-        private readonly IDriver _driver;
-        private RestaurantAppData _data;
+        private readonly RestaurantAppData _data;
 
-        public GroupsController(IDriver driver)
+        public GroupsController(RestaurantAppData data)
         {
-            _driver = driver;
-            _data = new RestaurantAppData(driver);
+            _data = data;
         }
 
         [HttpGet]
