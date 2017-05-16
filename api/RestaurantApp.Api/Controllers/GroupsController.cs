@@ -22,7 +22,7 @@ namespace RestaurantApp.Api.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<AppGroup> Get()
+        public IEnumerable<Group> Get()
         {
             return _data.Group.GetAll();
         }
@@ -40,7 +40,7 @@ namespace RestaurantApp.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] AppGroup group)
+        public IActionResult Post([FromBody] Group group)
         {
             if (group == null)
             {

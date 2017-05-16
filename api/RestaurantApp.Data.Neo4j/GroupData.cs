@@ -18,7 +18,7 @@ namespace RestaurantApp.Data.Neo4j
             _groupMapper = new GroupMapper();
         }
 
-        public AppGroup Add(AppGroup group)
+        public Group Add(Group group)
         {
             if (group != null)
             {
@@ -36,7 +36,7 @@ namespace RestaurantApp.Data.Neo4j
 
                         tx.Success();
 
-                        return new AppGroup
+                        return new Group
                         {
                             Id = guid,
                             Name = group.Name
@@ -49,7 +49,7 @@ namespace RestaurantApp.Data.Neo4j
             return null;
         }
 
-        public AppGroup Get(Guid id)
+        public Group Get(Guid id)
         {
             using (var session = _driver.Session())
             {
@@ -60,7 +60,7 @@ namespace RestaurantApp.Data.Neo4j
             }
         }
 
-        public IEnumerable<AppGroup> GetAll()
+        public IEnumerable<Group> GetAll()
         {
             using (var session = _driver.Session())
             {

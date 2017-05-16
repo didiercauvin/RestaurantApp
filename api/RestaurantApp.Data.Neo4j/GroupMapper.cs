@@ -10,11 +10,11 @@ namespace RestaurantApp.Data.Neo4j
 {
     public class GroupMapper
     {
-        public AppGroup Map(IRecord group)
+        public Group Map(IRecord group)
         {
             if (group != null)
             {
-                return new AppGroup
+                return new Group
                 {
                     Id = Guid.Parse(group["Id"].As<string>()),
                     Name = group["Name"].As<string>()

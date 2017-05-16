@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
@@ -38,12 +39,6 @@ namespace RestaurantApp.Api
 
             services.AddNeo4jDriver("bolt://localhost:7687", "neo4j", "restaurant");
             services.AddTransient<RestaurantAppData>();
-            //services.AddDbContext<RestaurantAppContext>(options =>
-            //{
-            //    options.UseNpgsql(Configuration.GetConnectionString("RestaurantAppDatabase"), b => b.MigrationsAssembly("RestaurantApp.Api"));
-            //});
-
-            //services.AddScoped<RestaurantAppData>();
 
             services.AddMvc();
         }
@@ -59,6 +54,16 @@ namespace RestaurantApp.Api
             }
             
             app.UseCors("CorsPolicy");
+
+            app.UseCookieAuthentication(new CookieAuthenticationOptions()
+            {
+                AuthenticationScheme = "Cookies",
+                LoginPath = new PathString("/login"),
+                AccessDeniedPath = new PathString("/forbidden"),
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true
+            });
+
             app.UseMvc();
 
             //RestaurantAppDbInitializer.Initialize(restaurantAppContext);

@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <Compile Remove="Controllers\CuisinesController.cs" />
+    <Compile Remove="Controllers\UsersController.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +29,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="1.1.1" />
@@ -36,6 +38,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="1.1.0" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="1.1.0" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.Design" Version="1.1.0" />
+    <PackageReference Include="Neo4j.Driver" Version="1.2.0" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0" />
@@ -44,7 +47,6 @@
   <ItemGroup>
     <ProjectReference Include="..\RestaurantApp.Data.Neo4j\RestaurantApp.Data.Neo4j.csproj" />
     <ProjectReference Include="..\RestaurantApp.Domain\RestaurantApp.Domain.csproj" />
-    <ProjectReference Include="..\RestaurantApp.Data\RestaurantApp.Data.csproj" />
   </ItemGroup>
 
 </Project>

@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestaurantApp.Api", "Restau
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestaurantApp.Domain", "RestaurantApp.Domain\RestaurantApp.Domain.csproj", "{94FF93A3-3824-469F-8430-825404D8D578}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestaurantApp.Data", "RestaurantApp.Data\RestaurantApp.Data.csproj", "{A1C6A65B-51EB-44A0-9CA3-80E51D86B19D}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{2CCD5395-F98F-43CE-9CF0-C7674DB76620}"
 	ProjectSection(SolutionItems) = preProject
 		referentiel_neo4j.txt = referentiel_neo4j.txt
@@ -32,10 +30,6 @@ Global
 		{94FF93A3-3824-469F-8430-825404D8D578}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94FF93A3-3824-469F-8430-825404D8D578}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94FF93A3-3824-469F-8430-825404D8D578}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A1C6A65B-51EB-44A0-9CA3-80E51D86B19D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A1C6A65B-51EB-44A0-9CA3-80E51D86B19D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A1C6A65B-51EB-44A0-9CA3-80E51D86B19D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A1C6A65B-51EB-44A0-9CA3-80E51D86B19D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F23414C1-4237-4157-A349-71DDC5CF4B48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F23414C1-4237-4157-A349-71DDC5CF4B48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F23414C1-4237-4157-A349-71DDC5CF4B48}.Release|Any CPU.ActiveCfg = Release|Any CPU
