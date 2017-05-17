@@ -5,30 +5,14 @@ namespace RestaurantApp.Data
 {
     public static class RestaurantAppDbInitializer
     {
-        public static void Initialize(RestaurantAppContext context)
+        public static void Initialize(UserIdentityDbContext context)
         {
             context.Database.EnsureCreated();
+            
+            var didier = new RestaurantUser { Name = "Didier" };
+            var ludovic = new RestaurantUser { Name = "Ludovic" };
 
-            if (context.Restaurants.Any())
-            {
-                return;
-            }
-
-            var resto1 = new Restaurant { Name = "Un bon resto 1", Description = "Description 1" };
-            var resto2 = new Restaurant { Name = "Un bon resto 2", Description = "Description 2" };
-
-            var restaurants = new Restaurant[]
-            {
-                resto1,
-                resto2
-            };
-
-            context.Restaurants.AddRange(restaurants);
-
-            var didier = new User { FirstName = "Didier", LastName = "Cauvin" };
-            var ludovic = new User { FirstName = "Ludovic", LastName = "Meril" };
-
-            var users = new User[]
+            var users = new []
             {
                 didier,
                 ludovic

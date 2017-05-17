@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using RestaurantApp.Data.Neo4j;
 using RestaurantApp.Domain;
 using System;
+using Microsoft.AspNetCore.Authorization;
 using Neo4j.Driver.V1;
 
 namespace RestaurantApp.Api.Controllers
@@ -10,6 +11,8 @@ namespace RestaurantApp.Api.Controllers
     /// <summary>
     /// Restaurants controller
     /// </summary>
+    
+    [Authorize]
     [Produces("application/json")]
     [Route("api/restaurants")]
     public class RestaurantsController : Controller

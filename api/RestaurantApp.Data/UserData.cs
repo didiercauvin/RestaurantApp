@@ -10,14 +10,14 @@ namespace RestaurantApp.Data
 {
     public class UserData
     {
-        private IDriver _driver;
+        private UserIdentityDbContext _context;
 
-        public UserData(IDriver driver)
+        public UserData(UserIdentityDbContext context)
         {
-            _driver = driver;
+            _context = context;
         }
 
-        public IEnumerable<User> GetAll()
+        public IEnumerable<RestaurantUser> GetAll()
         {
             //using (var session = _driver.Session())
             //{
@@ -30,7 +30,7 @@ namespace RestaurantApp.Data
             return null;
         }
 
-        public User Get(long id)
+        public RestaurantUser Get(long id)
         {
             //return _context.Users.FirstOrDefault(x => x.Id == id);
             return null;
