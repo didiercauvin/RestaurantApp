@@ -9,10 +9,8 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace RestaurantApp.Domain
 {
-    public class RestaurantUser: IdentityUser<Guid>
+    public class RestaurantUser: IdentityUser
     {
-        public Guid Id { get; set; }
-        
         public string Name { get; set; }
         
     }

@@ -48,8 +48,10 @@ namespace RestaurantApp.Api
                 options.UseNpgsql(Configuration.GetConnectionString("RestaurantAppDatabase"), b => b.MigrationsAssembly("RestaurantApp.Api"));
             });
 
-            services.AddIdentity<RestaurantUser, IdentityRole<Guid>>()
-                .AddEntityFrameworkStores<UserIdentityDbContext, Guid>();
+            services.AddTransient<RestaurantIdentityInitializer>();
+
+            services.AddIdentity<RestaurantUser, IdentityRole>()
+                .AddEntityFrameworkStores<UserIdentityDbContext>();
 
             services.Configure<IdentityOptions>(config =>
             {
@@ -86,7 +88,7 @@ namespace RestaurantApp.Api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, RestaurantIdentityInitializer identitySeeder)
         {
             loggerFactory.AddConsole();
 
@@ -107,6 +109,8 @@ namespace RestaurantApp.Api
             //    AutomaticAuthenticate = true,
             //    AutomaticChallenge = true
             //});
+
+            identitySeeder.Seed().Wait();
 
             app.UseMvc();
         }

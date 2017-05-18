@@ -5,9 +5,9 @@ using RestaurantApp.Domain;
 
 namespace RestaurantApp.Data 
 {
-    public class UserIdentityDbContext: IdentityDbContext<RestaurantUser, IdentityRole<Guid>, Guid>
+    public class UserIdentityDbContext: IdentityDbContext
     {
-        public UserIdentityDbContext(DbContextOptions<UserIdentityDbContext> options) : base(options)
+        public UserIdentityDbContext(DbContextOptions options) : base(options)
         {
 
         }
