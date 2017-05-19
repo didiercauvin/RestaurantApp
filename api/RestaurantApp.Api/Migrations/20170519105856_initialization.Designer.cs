@@ -7,10 +7,11 @@ using RestaurantApp.Data;
 
 namespace RestaurantApp.Api.Migrations
 {
-    [DbContext(typeof(UserIdentityDbContext))]
-    partial class UserIdentityDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(RestaurantAppContext))]
+    [Migration("20170519105856_initialization")]
+    partial class initialization
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)

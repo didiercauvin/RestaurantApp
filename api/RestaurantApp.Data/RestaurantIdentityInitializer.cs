@@ -18,6 +18,7 @@ namespace RestaurantApp.Data
             _userMgr = userMgr;
             _roleMgr = roleMgr;
         }
+
         public async Task Seed()
         {
             var user = await _userMgr.FindByNameAsync("didier");
@@ -38,7 +39,7 @@ namespace RestaurantApp.Data
                     Email = "didier.cauvin@gmail.com"
                 };
 
-                var userResult = await _userMgr.CreateAsync(user, "password");
+                var userResult = await _userMgr.CreateAsync(user, "P@ssw0rd!");
                 var roleResult = await _userMgr.AddToRoleAsync(user, "Admin");
                 var claimResult = await _userMgr.AddClaimAsync(user, new Claim("SuperUser", "True"));
 

@@ -10,9 +10,9 @@ namespace RestaurantApp.Data
 {
     public class UserData
     {
-        private UserIdentityDbContext _context;
+        private RestaurantAppContext _context;
 
-        public UserData(UserIdentityDbContext context)
+        public UserData(RestaurantAppContext context)
         {
             _context = context;
         }

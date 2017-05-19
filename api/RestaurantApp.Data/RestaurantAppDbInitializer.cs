@@ -5,7 +5,7 @@ namespace RestaurantApp.Data
 {
     public static class RestaurantAppDbInitializer
     {
-        public static void Initialize(UserIdentityDbContext context)
+        public static void Initialize(RestaurantAppContext context)
         {
             context.Database.EnsureCreated();
             

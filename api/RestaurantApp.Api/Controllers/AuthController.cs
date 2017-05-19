@@ -15,10 +15,10 @@ namespace RestaurantApp.Api.Controllers
     [Route("api/auth")]
     public class AuthController : Controller
     {
-        private readonly UserIdentityDbContext _context;
+        private readonly RestaurantAppContext _context;
         private readonly SignInManager<RestaurantUser> _signInMgr;
 
-        public AuthController(UserIdentityDbContext context, SignInManager<RestaurantUser> signInMgr)
+        public AuthController(RestaurantAppContext context, SignInManager<RestaurantUser> signInMgr)
         {
             _context = context;
             _signInMgr = signInMgr;

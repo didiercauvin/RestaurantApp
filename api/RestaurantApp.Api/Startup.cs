@@ -18,7 +18,7 @@ namespace RestaurantApp.Api
 {
     public class Startup
     {
-        public IConfigurationRoot Configuration { get; }
+        private IConfigurationRoot _config;
 
         public Startup(IHostingEnvironment env)
         {
@@ -27,31 +27,24 @@ namespace RestaurantApp.Api
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
-            Configuration = builder.Build();
+            _config = builder.Build();
         }
-
+        
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(options =>
-            {
-                options.AddPolicy("CorsPolicy",
-                    builder => builder.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    .AllowCredentials());
-            });
-
-            services.AddDbContext<UserIdentityDbContext>(options =>
-            {
-                options.UseNpgsql(Configuration.GetConnectionString("RestaurantAppDatabase"), b => b.MigrationsAssembly("RestaurantApp.Api"));
-            });
-
+            services.AddSingleton(_config);
+            services.AddDbContext<RestaurantAppContext>(ServiceLifetime.Scoped);
             services.AddTransient<RestaurantIdentityInitializer>();
 
+            services.AddScoped<UserAppData>();
+
+            services.AddNeo4jDriver("bolt://localhost:7687", "neo4j", "restaurant");
+            services.AddTransient<RestaurantAppData>();
+
             services.AddIdentity<RestaurantUser, IdentityRole>()
-                .AddEntityFrameworkStores<UserIdentityDbContext>();
+                .AddEntityFrameworkStores<RestaurantAppContext>();
 
             services.Configure<IdentityOptions>(config =>
             {
@@ -77,11 +70,15 @@ namespace RestaurantApp.Api
                     }
                 };
             });
-
-            services.AddScoped<UserAppData>();
-
-            services.AddNeo4jDriver("bolt://localhost:7687", "neo4j", "restaurant");
-            services.AddTransient<RestaurantAppData>();
+            
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials());
+            });
 
 
             services.AddMvc();
