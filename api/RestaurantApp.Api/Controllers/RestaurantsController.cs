@@ -41,6 +41,7 @@ namespace RestaurantApp.Api.Controllers
             return Ok(restaurant);
         }
 
+        [Authorize(Policy = "SuperUsers")]
         [HttpPost]
         public IActionResult Post([FromBody] Restaurant restaurant)
         {
@@ -48,9 +49,9 @@ namespace RestaurantApp.Api.Controllers
             {
                 return BadRequest();
             }
-
+            
             restaurant = _data.Restaurant.Add(restaurant);
-
+            
             return CreatedAtRoute("GetRestaurant", new { id = restaurant.Id }, restaurant);
         }
 

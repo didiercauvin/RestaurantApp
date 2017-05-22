@@ -21,7 +21,7 @@ namespace RestaurantApp.Data
 
         public async Task Seed()
         {
-            var user = await _userMgr.FindByNameAsync("didier");
+            var user = await _userMgr.FindByNameAsync("didiercauvin");
 
             if (user == null)
             {

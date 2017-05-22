@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -9,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using Neo4j.Driver.V1;
 using RestaurantApp.Data;
 using RestaurantApp.Domain;
@@ -80,6 +82,10 @@ namespace RestaurantApp.Api
                         .AllowCredentials());
             });
 
+            services.AddAuthorization(cfg =>
+            {
+                cfg.AddPolicy("SuperUsers", p => p.RequireClaim("SuperUser", "True"));
+            });
 
             services.AddMvc();
         }
@@ -97,6 +103,19 @@ namespace RestaurantApp.Api
             app.UseCors("CorsPolicy");
 
             app.UseIdentity();
+
+            //app.UseJwtBearerAuthentication(new JwtBearerOptions()
+            //{
+            //    AutomaticAuthenticate = true,
+            //    AutomaticChallenge = true,
+            //    TokenValidationParameters = new TokenValidationParameters()
+            //    {
+            //        ValidIssuer = _config["Tokens:Issuer"],
+            //        ValidAudience = _config["Tokens:Audience"],
+            //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"])),
+            //        ValidateLifetime = true
+            //    }
+            //});
 
             //app.UseCookieAuthentication(new CookieAuthenticationOptions()
             //{
