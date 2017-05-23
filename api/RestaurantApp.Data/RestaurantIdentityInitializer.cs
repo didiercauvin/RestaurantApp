@@ -35,7 +35,6 @@ namespace RestaurantApp.Data
                 user = new RestaurantUser
                 {
                     UserName = "didiercauvin",
-                    Name = "didier",
                     Email = "didier.cauvin@gmail.com"
                 };
 

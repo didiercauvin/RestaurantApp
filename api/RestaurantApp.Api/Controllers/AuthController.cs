@@ -20,48 +20,19 @@ namespace RestaurantApp.Api.Controllers
     [Route("api/auth")]
     public class AuthController : Controller
     {
-        private readonly RestaurantAppContext _context;
-        private readonly SignInManager<RestaurantUser> _signInMgr;
         private readonly UserManager<RestaurantUser> _userMgr;
         private readonly IPasswordHasher<RestaurantUser> _hasher;
         private readonly IConfigurationRoot _config;
 
-        public AuthController(RestaurantAppContext context, SignInManager<RestaurantUser> signInMgr, UserManager<RestaurantUser> userMgr, IPasswordHasher<RestaurantUser> hasher, IConfigurationRoot config) 
+        public AuthController(RestaurantAppIdentityContext identityContext, SignInManager<RestaurantUser> signInMgr, UserManager<RestaurantUser> userMgr, IPasswordHasher<RestaurantUser> hasher, IConfigurationRoot config) 
         {
-            _context = context;
-            _signInMgr = signInMgr;
             _userMgr = userMgr;
             _hasher = hasher;
             _config = config;
         }
-
-        public IActionResult Get()
-        {
-            return Ok();
-        }
-
+        
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] CredentialModel credential)
-        {
-            try
-            {
-                var result = await _signInMgr.PasswordSignInAsync(credential.Login, credential.Password, false, false);
-
-                if (result.Succeeded)
-                {
-                    return Ok();
-                }
-            }
-            catch (Exception ex)
-            {
-
-            }
-
-            return BadRequest("Failed to login");
-        }
-
-        [HttpPost("token")]
-        public async Task<IActionResult> CreateToken([FromBody] CredentialModel model)
+        public async Task<IActionResult> Login([FromBody] CredentialModel model)
         {
             var user = await _userMgr.FindByNameAsync(model.Login);
             if (user != null)
@@ -74,8 +45,7 @@ namespace RestaurantApp.Api.Controllers
                     var claims = new[]
                     {
                         new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
-                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                        new Claim(JwtRegisteredClaimNames.GivenName, user.Name),
+                        new Claim(JwtRegisteredClaimNames.GivenName, user.UserName),
                         new Claim(JwtRegisteredClaimNames.Email, user.Email) 
                     }.Union(userClaims);
 
@@ -95,7 +65,7 @@ namespace RestaurantApp.Api.Controllers
             }
 
 
-            return BadRequest("Failed to generate token");
+            return BadRequest("Failed to login");
         }
     }
 }

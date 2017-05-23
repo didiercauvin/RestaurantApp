@@ -7,9 +7,9 @@ namespace RestaurantApp.Data
 {
     public class UserAppData
     {
-        public UserAppData(RestaurantAppContext context)
+        public UserAppData(RestaurantAppIdentityContext identityContext)
         {
-            User = new UserData(context);
+            User = new UserData(identityContext);
         }
         
         public UserData User { get; }

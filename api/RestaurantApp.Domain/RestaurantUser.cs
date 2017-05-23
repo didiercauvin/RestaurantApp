@@ -11,7 +11,6 @@ namespace RestaurantApp.Domain
 {
     public class RestaurantUser: IdentityUser
     {
-        public string Name { get; set; }
         
     }
 }

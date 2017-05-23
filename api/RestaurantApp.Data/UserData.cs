@@ -10,11 +10,11 @@ namespace RestaurantApp.Data
 {
     public class UserData
     {
-        private RestaurantAppContext _context;
+        private RestaurantAppIdentityContext _identityContext;
 
-        public UserData(RestaurantAppContext context)
+        public UserData(RestaurantAppIdentityContext identityContext)
         {
-            _context = context;
+            _identityContext = identityContext;
         }
 
         public IEnumerable<RestaurantUser> GetAll()

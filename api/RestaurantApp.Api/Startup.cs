@@ -37,16 +37,16 @@ namespace RestaurantApp.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton(_config);
-            services.AddDbContext<RestaurantAppContext>(ServiceLifetime.Scoped);
+            services.AddDbContext<RestaurantAppIdentityContext>(ServiceLifetime.Scoped);
             services.AddTransient<RestaurantIdentityInitializer>();
 
             services.AddScoped<UserAppData>();
-
-            services.AddNeo4jDriver("bolt://localhost:7687", "neo4j", "restaurant");
+            
+            services.AddNeo4jDriver(_config["Neo4j:connectionString"], _config["Neo4j:username"], _config["Neo4j:password"]);
             services.AddTransient<RestaurantAppData>();
 
             services.AddIdentity<RestaurantUser, IdentityRole>()
-                .AddEntityFrameworkStores<RestaurantAppContext>();
+                .AddEntityFrameworkStores<RestaurantAppIdentityContext>();
 
             services.Configure<IdentityOptions>(config =>
             {
@@ -104,28 +104,19 @@ namespace RestaurantApp.Api
 
             app.UseIdentity();
 
-            //app.UseJwtBearerAuthentication(new JwtBearerOptions()
-            //{
-            //    AutomaticAuthenticate = true,
-            //    AutomaticChallenge = true,
-            //    TokenValidationParameters = new TokenValidationParameters()
-            //    {
-            //        ValidIssuer = _config["Tokens:Issuer"],
-            //        ValidAudience = _config["Tokens:Audience"],
-            //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"])),
-            //        ValidateLifetime = true
-            //    }
-            //});
-
-            //app.UseCookieAuthentication(new CookieAuthenticationOptions()
-            //{
-            //    AuthenticationScheme = "Cookies",
-            //    LoginPath = new PathString("/login"),
-            //    AccessDeniedPath = new PathString("/forbidden"),
-            //    AutomaticAuthenticate = true,
-            //    AutomaticChallenge = true
-            //});
-
+            app.UseJwtBearerAuthentication(new JwtBearerOptions()
+            {
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+                TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidIssuer = _config["Tokens:Issuer"],
+                    ValidAudience = _config["Tokens:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"])),
+                    ValidateLifetime = true
+                }
+            });
+            
             identitySeeder.Seed().Wait();
 
             app.UseMvc();

@@ -8,9 +8,10 @@ using RestaurantApp.Data;
 namespace RestaurantApp.Api.Migrations
 {
     [DbContext(typeof(RestaurantAppIdentityContext))]
-    partial class RestaurantAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170523120824_Delete_Name")]
+    partial class Delete_Name
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)

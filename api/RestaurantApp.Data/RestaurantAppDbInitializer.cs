@@ -5,12 +5,12 @@ namespace RestaurantApp.Data
 {
     public static class RestaurantAppDbInitializer
     {
-        public static void Initialize(RestaurantAppContext context)
+        public static void Initialize(RestaurantAppIdentityContext identityContext)
         {
-            context.Database.EnsureCreated();
+            identityContext.Database.EnsureCreated();
             
-            var didier = new RestaurantUser { Name = "Didier" };
-            var ludovic = new RestaurantUser { Name = "Ludovic" };
+            var didier = new RestaurantUser { UserName = "Didier" };
+            var ludovic = new RestaurantUser { UserName = "Ludovic" };
 
             var users = new []
             {
@@ -18,9 +18,9 @@ namespace RestaurantApp.Data
                 ludovic
             };
 
-            context.Users.AddRange(users);
+            identityContext.Users.AddRange(users);
 
-            context.SaveChanges();
+            identityContext.SaveChanges();
         }
     }
 }

@@ -6,11 +6,11 @@ using RestaurantApp.Domain;
 
 namespace RestaurantApp.Data 
 {
-    public class RestaurantAppContext: IdentityDbContext
+    public class RestaurantAppIdentityContext: IdentityDbContext
     {
         private readonly IConfigurationRoot _config;
 
-        public RestaurantAppContext(DbContextOptions options, IConfigurationRoot config) : base(options)
+        public RestaurantAppIdentityContext(DbContextOptions options, IConfigurationRoot config) : base(options)
         {
             _config = config;
         }

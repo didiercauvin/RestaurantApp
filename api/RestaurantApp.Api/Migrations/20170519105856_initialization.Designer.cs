@@ -7,7 +7,7 @@ using RestaurantApp.Data;
 
 namespace RestaurantApp.Api.Migrations
 {
-    [DbContext(typeof(RestaurantAppContext))]
+    [DbContext(typeof(RestaurantAppIdentityContext))]
     [Migration("20170519105856_initialization")]
     partial class initialization
     {

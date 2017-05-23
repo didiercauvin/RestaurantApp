@@ -15,6 +15,11 @@ namespace RestaurantApp.Data.Neo4j
             Group = new GroupData(driver);
         }
 
+        public void RegisterDriver()
+        {
+            
+        }
+
         public RestaurantData Restaurant { get; }
 
         public GroupData Group { get; set; }
