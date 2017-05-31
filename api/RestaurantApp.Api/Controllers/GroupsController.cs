@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Neo4j.Driver.V1;
-using RestaurantApp.Data.Neo4j;
+using RestaurantApp.Data;
 using RestaurantApp.Domain;
 
 namespace RestaurantApp.Api.Controllers

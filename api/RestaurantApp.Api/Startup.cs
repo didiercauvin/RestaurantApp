@@ -14,7 +14,6 @@ using Microsoft.IdentityModel.Tokens;
 using Neo4j.Driver.V1;
 using RestaurantApp.Data;
 using RestaurantApp.Domain;
-using RestaurantAppData = RestaurantApp.Data.Neo4j.RestaurantAppData;
 
 namespace RestaurantApp.Api
 {
@@ -42,7 +41,7 @@ namespace RestaurantApp.Api
 
             services.AddScoped<UserAppData>();
             
-            services.AddNeo4jDriver(_config["Neo4j:connectionString"], _config["Neo4j:username"], _config["Neo4j:password"]);
+            services.AddNeo4jDriver(_config);
             services.AddTransient<RestaurantAppData>();
 
             services.AddIdentity<RestaurantUser, IdentityRole>()

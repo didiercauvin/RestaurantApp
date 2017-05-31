@@ -5,7 +5,7 @@ using Neo4j.Driver.V1;
 using RestaurantApp.Data.Queries;
 using RestaurantApp.Domain;
 
-namespace RestaurantApp.Data.Neo4j
+namespace RestaurantApp.Data
 {
     public class GroupData
     {

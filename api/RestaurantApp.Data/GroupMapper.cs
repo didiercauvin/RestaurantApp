@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Neo4j.Driver.V1;
 using RestaurantApp.Domain;
 
-namespace RestaurantApp.Data.Neo4j
+namespace RestaurantApp.Data
 {
     public class GroupMapper
     {

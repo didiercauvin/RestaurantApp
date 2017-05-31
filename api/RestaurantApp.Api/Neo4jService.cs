@@ -6,19 +6,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
     public static class Neo4jService
     {
-        public static IServiceCollection AddNeo4jDriver(this IServiceCollection services, string connectionString, string username, string password)
+        public static IServiceCollection AddNeo4jDriver(this IServiceCollection services, IConfigurationRoot config)
         {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));
             }
-            
-            services.TryAdd(ServiceDescriptor.Transient<IDriver>(x => GraphDatabase.Driver(connectionString, AuthTokens.Basic(username, password))));
+
+            services.TryAdd(ServiceDescriptor.Transient<IDriver>(x => GraphDatabase.Driver(config["Neo4j:connectionString"], AuthTokens.Basic(config["Neo4j:username"], config["Neo4j:password"]))));
 
             return services;
         }

@@ -1,47 +1,117 @@
-﻿using RestaurantApp.Domain;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
+using Neo4j.Driver.V1;
+using RestaurantApp.Data.Queries;
+using RestaurantApp.Domain;
 
 namespace RestaurantApp.Data
 {
     public class RestaurantData
     {
-        private RestaurantAppContext _context;
+        private readonly IDriver _driver;
+        private readonly RestaurantMapper _restaurantMapper;
 
-        public RestaurantData(RestaurantAppContext context)
+        public RestaurantData(IDriver driver)
         {
-            _context = context;
+            _driver = driver;
+            _restaurantMapper = new RestaurantMapper();
         }
 
-        public IEnumerable<Restaurant> GetAll()
+        public Restaurant Add(Restaurant restaurant)
         {
-            return _context.Restaurants;
-        }
+            if (restaurant != null)
+            {
+                using (var session = _driver.Session())
+                {
+                    using (var tx = session.BeginTransaction())
+                    {
+                        var guid = Guid.NewGuid();
+                        tx.Run(Restaurants.CREATE,
+                            new Dictionary<string, object>
+                            {
+                                {"uuid", guid.ToString()},
+                                {"name", restaurant.Name},
+                                {"description", restaurant.Description},
+                                {"takeout", restaurant.TakeOut}
+                            });
 
-        public Restaurant Get(Guid id)
-        {
-            return _context.Restaurants.FirstOrDefault(x => x.Id == id);
-        }
+                        tx.Success();
 
-        public void Add(Restaurant restaurant)
-        {
-            _context.Restaurants.Add(restaurant);
-            _context.SaveChanges();
+                        return new Restaurant
+                        {
+                            Id = guid,
+                            Name = restaurant.Name,
+                            Description = restaurant.Description,
+                            TakeOut = restaurant.TakeOut
+                        };
+
+                    }
+                }
+            }
+
+            return null;
         }
 
         public void Update(Restaurant restaurant)
         {
-            _context.Restaurants.Update(restaurant);
-            _context.SaveChanges();
+            if (restaurant != null)
+            {
+                using (var session = _driver.Session())
+                {
+                    using (var tx = session.BeginTransaction())
+                    {
+                        tx.Run(Restaurants.UPDATE,
+                            new Dictionary<string, object>
+                            {
+                                {"uuid", restaurant.Id.ToString() },
+                                {"name", restaurant.Name},
+                                {"description", restaurant.Description},
+                                {"takeout", restaurant.TakeOut}
+                            });
+
+                        tx.Success();
+                    }
+                }
+            }
         }
 
         public void Delete(Guid id)
         {
-            var restaurant = _context.Restaurants.First(x => x.Id == id);
-            _context.Restaurants.Remove(restaurant);
-            _context.SaveChanges();
+            using (var session = _driver.Session())
+            {
+                using (var tx = session.BeginTransaction())
+                {
+                    tx.Run(Restaurants.DELETE, new Dictionary<string, object>
+                    {
+                        { "uuid", id.ToString()}
+                    });
+
+                    tx.Success();
+                }
+            }
+        }
+
+        public Restaurant Get(Guid id)
+        {
+            using (var session = _driver.Session())
+            {
+                var restaurant = session.Run(Restaurants.GET_BY_ID, new Dictionary<string, object> { { "uuid", id.ToString() } })
+                    .FirstOrDefault();
+
+                return _restaurantMapper.Map(restaurant);
+            }
+        }
+
+        public IEnumerable<Restaurant> GetAll()
+        {
+            using (var session = _driver.Session())
+            {
+                var result = session.Run(Restaurants.GET_ALL)
+                    .Select(_restaurantMapper.Map);
+
+                return result;
+            }
         }
     }
 }

@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using RestaurantApp.Data.Neo4j;
 using RestaurantApp.Domain;
 using System;
 using Microsoft.AspNetCore.Authorization;
 using Neo4j.Driver.V1;
+using RestaurantApp.Data;
 
 namespace RestaurantApp.Api.Controllers
 {
@@ -12,7 +12,7 @@ namespace RestaurantApp.Api.Controllers
     /// Restaurants controller
     /// </summary>
     
-    [Authorize]
+    //[Authorize]
     [Produces("application/json")]
     [Route("api/restaurants")]
     public class RestaurantsController : Controller
@@ -41,7 +41,7 @@ namespace RestaurantApp.Api.Controllers
             return Ok(restaurant);
         }
 
-        [Authorize(Policy = "SuperUsers")]
+        //[Authorize(Policy = "SuperUsers")]
         [HttpPost]
         public IActionResult Post([FromBody] Restaurant restaurant)
         {

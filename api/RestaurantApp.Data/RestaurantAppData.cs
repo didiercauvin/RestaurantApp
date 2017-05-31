@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Neo4j.Driver.V1;
+﻿using Neo4j.Driver.V1;
 
-namespace RestaurantApp.Data.Neo4j
+namespace RestaurantApp.Data
 {
     public class RestaurantAppData
     {
